@@ -1,0 +1,61 @@
+{
+  "terms": {
+    "url": "https://www.bankofcanada.ca/terms/"
+  },
+  "seriesDetail": {
+    "FXCADAUD": {
+      "label": "CAD/AUD",
+      "description": "Canadian dollar to Australian dollar daily exchange rate",
+      "dimension": {
+        "key": "d",
+        "name": "Date"
+      }
+    },
+    "FXCADUSD": {
+      "label": "CAD/USD",
+      "description": "Canadian dollar to US dollar daily exchange rate",
+      "dimension": {
+        "key": "d",
+        "name": "Date"
+      }
+    }
+  },
+  "observations": [
+    {
+      "d": "2023-03-31",
+      "FXCADAUD": {
+        "v": "1.1038"
+      },
+      "FXCADUSD": {
+        "v": "0.7389"
+      }
+    },
+    {
+      "d": "2023-04-03",
+      "FXCADAUD": {
+        "v": "1.0981"
+      },
+      "FXCADUSD": {
+        "v": "0.7442"
+      }
+    },
+    {
+      "d": "2023-04-04",
+      "FXCADAUD": {
+        "v": "1.1031"
+      },
+      "FXCADUSD": {
+        "v": "0.7437"
+      }
+    },
+    {
+      "d": "2023-04-05",
+      "FXCADAUD": {
+        "v": "1.1067"
+      },
+      "FXCADUSD": {
+        "v": "0.7431"
+      }
+    }
+  ]
+}
