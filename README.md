@@ -16,3 +16,5 @@ java -jar daily-exchange-rate-1.0-SNAPSHOT.jar [args params]
 Output file will be generated in directory where .jar file is.
 
 **NOTE:** this is one time running command line application. If you want to get new output, please, repeat **Step 2**.
+
+[![Java CI with Maven](https://github.com/nacenik/daily-exchange-rate/actions/workflows/maven.yml/badge.svg)](https://github.com/nacenik/daily-exchange-rate/actions/workflows/maven.yml)
