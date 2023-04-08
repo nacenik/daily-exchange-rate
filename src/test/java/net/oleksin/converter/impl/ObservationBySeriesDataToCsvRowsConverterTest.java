@@ -1,11 +1,9 @@
 package net.oleksin.converter.impl;
 
-import net.oleksin.model.jsonmodel.Dimension;
 import net.oleksin.model.jsonmodel.Observation;
 import net.oleksin.model.jsonmodel.ObservationsBySeriesData;
 import net.oleksin.model.jsonmodel.Rate;
 import net.oleksin.model.jsonmodel.SeriesDetail;
-import net.oleksin.model.jsonmodel.Terms;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +13,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ObservationBySeriesDataToCsvRowsConverterTest {
     private static final String EXPECTED_SERIES_NUMBER = "FXCADUSD";
@@ -55,7 +54,7 @@ class ObservationBySeriesDataToCsvRowsConverterTest {
         assertEquals(1, csvRows.size());
         final var csvRow = csvRows.get(0);
         assertEquals(EXPECTED_SERIES_NUMBER, csvRow.getSeriesName());
-        assertEquals(Map.of(expectedDate, EXPECTED_RATE), csvRow.getElements());
+        assertEquals(Map.of(expectedDate, EXPECTED_RATE), csvRow.getDailyExchangeRate());
         assertEquals(EXPECTED_DESCRIPTION, csvRow.getDescription());
         assertEquals(EXPECTED_LABEL, csvRow.getLabel());
     }

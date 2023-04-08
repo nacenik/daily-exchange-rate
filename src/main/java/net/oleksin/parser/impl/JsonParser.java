@@ -2,9 +2,9 @@ package net.oleksin.parser.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.oleksin.deserializer.ObservationDeserializer;
 import net.oleksin.model.jsonmodel.Observation;
 import net.oleksin.model.jsonmodel.ObservationsBySeriesData;
-import net.oleksin.deserializer.ObservationDeserializer;
 import net.oleksin.parser.Parser;
 
 public class JsonParser implements Parser<String, ObservationsBySeriesData> {

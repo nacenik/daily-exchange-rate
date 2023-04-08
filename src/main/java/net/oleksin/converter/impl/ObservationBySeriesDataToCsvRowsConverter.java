@@ -23,10 +23,10 @@ public class ObservationBySeriesDataToCsvRowsConverter implements Converter<Obse
         final var csvRowModels = new ArrayList<CsvRow>();
         observationsBySeriesData.getSeriesDetail()
                 .forEach((k,v) -> {
-                    final var csvRowModel = new CsvRow();
-                    csvRowModel.setSeriesName(k);
-                    csvRowModel.setLabel(v.getLabel());
-                    csvRowModel.setDescription(v.getDescription());
+                    final var csvRow = new CsvRow();
+                    csvRow.setSeriesName(k);
+                    csvRow.setLabel(v.getLabel());
+                    csvRow.setDescription(v.getDescription());
                     final var treeMap =
                             new TreeMap<LocalDate, BigDecimal>(Comparator.reverseOrder());
                     treeMap.putAll(
@@ -42,8 +42,8 @@ public class ObservationBySeriesDataToCsvRowsConverter implements Converter<Obse
                                     )
                             )
                     );
-                    csvRowModel.setElements(treeMap);
-                    csvRowModels.add(csvRowModel);
+                    csvRow.setDailyExchangeRate(treeMap);
+                    csvRowModels.add(csvRow);
                 });
         return csvRowModels;
     }

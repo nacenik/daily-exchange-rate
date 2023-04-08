@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CsvRowsToStringConverterTest {
     private static final String EXPECTED_SERIES_NUMBER = "FXCADUSD";
@@ -33,7 +33,7 @@ class CsvRowsToStringConverterTest {
     void setUp() {
         csvRows = new ArrayList<>();
         csvRows.add(new CsvRow(EXPECTED_SERIES_NUMBER, EXPECTED_DESCRIPTION,
-                EXPECTED_LABEL, Map.of(EXPECTED_DATE, EXPECTED_RATE)));
+                EXPECTED_LABEL, Map.of(EXPECTED_DATE, EXPECTED_RATE), Map.of()));
     }
 
     @Test
@@ -49,7 +49,7 @@ class CsvRowsToStringConverterTest {
 
     @Test
     void convert_csvRowsWithoutElements_ok() {
-        csvRows.get(0).setElements(Map.of());
+        csvRows.get(0).setDailyExchangeRate(Map.of());
         final var result = converter.convert(csvRows);
         assertEquals("", result);
     }
