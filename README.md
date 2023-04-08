@@ -11,8 +11,8 @@ This command compiles the source code, runs tests, and creates a packaged JAR fi
 ## Step 2. Run the Command Line Application
 To run the command line application, navigate to the target directory or directory with .jar file in your terminal/command prompt and run the following command:
 ```
-java -jar target/daily-exchange-rate-1.0-SNAPSHOT.jar [args params]
+java -jar daily-exchange-rate-1.0-SNAPSHOT.jar [args params]
 ```
 Output file will be generated in directory where .jar file is.
 
-**NOTE:** this is one time runing command line application. If you want to get new output, please, repeat **Step 2**.
+**NOTE:** this is one time running command line application. If you want to get new output, please, repeat **Step 2**.
