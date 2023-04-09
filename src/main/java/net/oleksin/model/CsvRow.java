@@ -17,7 +17,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"dailyExchangeRate", "dailyChange"})
 @ToString
 public class CsvRow {
     private String seriesName;

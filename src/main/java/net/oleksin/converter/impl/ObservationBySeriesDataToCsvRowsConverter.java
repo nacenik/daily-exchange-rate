@@ -14,7 +14,6 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class ObservationBySeriesDataToCsvRowsConverter implements Converter<ObservationsBySeriesData, List<CsvRow>> {
-
     @Override
     public List<CsvRow> convert(ObservationsBySeriesData observationsBySeriesData) {
         if (observationsBySeriesData == null) {

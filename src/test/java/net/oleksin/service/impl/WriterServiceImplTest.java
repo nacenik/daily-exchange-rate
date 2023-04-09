@@ -38,9 +38,15 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void writeToFile_validPath_throwException() {
+    void writeToFile_validPath_throwIllegalArgumentException() {
         final var validPath = "src/test/resources/";
-        assertThrows(RuntimeException.class, () -> writerService.writeToFile("test", validPath));
-        assertTrue(Files.isDirectory(Path.of(validPath)));
+        assertThrows(IllegalArgumentException.class, () ->
+                writerService.writeToFile("test", validPath));
+    }
+
+    @Test
+    void writeToFile_validPathNullData_throwRuntimeException() {
+        assertThrows(RuntimeException.class, () ->
+                writerService.writeToFile(null, OUTPUT_FILE_PATH));
     }
 }

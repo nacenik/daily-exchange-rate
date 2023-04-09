@@ -8,27 +8,24 @@ import net.oleksin.service.DataPreparationService;
 
 import java.util.List;
 
-public class CsvRowsDataPreparationService implements DataPreparationService<ObservationsBySeriesData> {
+public class CsvRowsDataPreparationService implements DataPreparationService<List<CsvRow>> {
     private static final String FIRST_LINE = "Date,Series Name,Label,Description,Value,Change";
     private final Converter<List<CsvRow>, String> csvRowConverter;
-    private final Converter<ObservationsBySeriesData, List<CsvRow>> observationsBySeriesDataConverter;
     private final ChangeCounterService changeCounterService;
 
     public CsvRowsDataPreparationService(Converter<List<CsvRow>, String> csvRowConverter,
-                                         Converter<ObservationsBySeriesData, List<CsvRow>> observationsBySeriesDataConverter,
-                                         ChangeCounterService changeCounterService) {
+                                                      ChangeCounterService changeCounterService) {
         this.csvRowConverter = csvRowConverter;
-        this.observationsBySeriesDataConverter = observationsBySeriesDataConverter;
         this.changeCounterService = changeCounterService;
     }
 
     @Override
-    public String prepareData(ObservationsBySeriesData data) {
-        final var csvRows = observationsBySeriesDataConverter.convert(data);
-        if (!csvRows.isEmpty()) {
-            changeCounterService.countChange(csvRows);
-            return FIRST_LINE + csvRowConverter.convert(csvRows);
+    public String prepareData(List<CsvRow> data) {
+        if (!data.isEmpty()) {
+            changeCounterService.countChange(data);
+            return FIRST_LINE + csvRowConverter.convert(data);
         }
-        throw new IllegalArgumentException("Data is null");
+        throw new IllegalArgumentException("Cannot prepare data cause "
+                + "CsvRow is null");
     }
 }
