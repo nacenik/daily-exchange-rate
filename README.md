@@ -11,7 +11,7 @@ This command compiles the source code, runs tests, and creates a packaged JAR fi
 ## Step 2. Run the Command Line Application
 To run the command line application, navigate to the target directory or directory with .jar file in your terminal/command prompt and run the following command:
 ```
-java -jar daily-exchange-rate-1.0-SNAPSHOT.jar [args params]
+java -jar daily-exchange-rate-1.0-SNAPSHOT.jar [command line params]
 ```
 Output file with name `exchange-rate.csv` will be generated in directory where .jar file is.
 
