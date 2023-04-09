@@ -41,7 +41,7 @@ class CommandLineQueryBuilderServiceTest {
         final var strings = new String[]{};
         Mockito.when(mockParser.parse(strings))
                 .thenReturn(CommandLineArgs.builder()
-                        .seriesNames(List.of())
+                        .series(List.of())
                         .build());
 
         final var query = service.buildQuery(strings);
@@ -56,7 +56,7 @@ class CommandLineQueryBuilderServiceTest {
         final var serialNumber = "FXUSDEUR";
         Mockito.when(mockParser.parse(Mockito.any()))
                 .thenReturn(CommandLineArgs.builder()
-                        .seriesNames(List.of(serialNumber))
+                        .series(List.of(serialNumber))
                         .build());
 
         final var query = service.buildQuery(new String[]{serialNumber});
@@ -72,7 +72,7 @@ class CommandLineQueryBuilderServiceTest {
         final var serialNumbers = List.of("FXAUDCAD", "FXUSDEUR", "fxcadeur");
         Mockito.when(mockParser.parse(Mockito.any()))
                 .thenReturn(CommandLineArgs.builder()
-                        .seriesNames(serialNumbers)
+                        .series(serialNumbers)
                         .build());
 
         final var query = service.buildQuery(serialNumbers
@@ -90,7 +90,7 @@ class CommandLineQueryBuilderServiceTest {
         final var oneDate = List.of(now.toString());
         Mockito.when(mockParser.parse(Mockito.any()))
                 .thenReturn(CommandLineArgs.builder()
-                        .seriesNames(List.of())
+                        .series(List.of())
                         .startDate(now)
                         .build());
 
@@ -108,7 +108,7 @@ class CommandLineQueryBuilderServiceTest {
         final var oneDate = List.of(now.toString());
         Mockito.when(mockParser.parse(Mockito.any()))
                 .thenReturn(CommandLineArgs.builder()
-                        .seriesNames(List.of())
+                        .series(List.of())
                         .startDate(now)
                         .build());
 
@@ -125,7 +125,7 @@ class CommandLineQueryBuilderServiceTest {
         final var oneDate = List.of(now.toString(), startDate.toString());
         Mockito.when(mockParser.parse(Mockito.any()))
                 .thenReturn(CommandLineArgs.builder()
-                        .seriesNames(List.of())
+                        .series(List.of())
                         .startDate(startDate)
                         .endDate(now)
                         .build());

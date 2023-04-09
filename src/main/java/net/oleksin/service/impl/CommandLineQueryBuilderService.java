@@ -20,9 +20,9 @@ public class CommandLineQueryBuilderService implements QueryBuilderService {
     public String buildQuery(String[] args) {
         final var stringBuilder = new StringBuilder();
         final var commandLineArgs = commandLineArgsParser.parse(args);
-        stringBuilder.append(String.format(QUERY, commandLineArgs.getSeriesNames().isEmpty()
+        stringBuilder.append(String.format(QUERY, commandLineArgs.getSeries().isEmpty()
                 ? DEFAULT_SERIAL_NUMBER
-                : String.join(",", commandLineArgs.getSeriesNames())));
+                : String.join(",", commandLineArgs.getSeries())));
         final var now = LocalDate.now();
         setDate(stringBuilder, commandLineArgs, now);
         return stringBuilder.toString();

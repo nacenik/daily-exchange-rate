@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class CommandLineArgsParser implements Parser<String[], CommandLineArgs> {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final Pattern SERIAL_NUMBER_PATTERN = Pattern.compile("^(FX|fx|Fx|fX)[A-Za-z]{6}$");
+    private static final Pattern SERIAL_NUMBER_PATTERN = Pattern.compile("^(?i)fx[a-z]{6}$");
     private static final Pattern DATE_PATTERN = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
     private static final int MAX_SERIAL_NUMBER_SIZE = 4;
     private static final int MAX_DATES_SIZE = 2;

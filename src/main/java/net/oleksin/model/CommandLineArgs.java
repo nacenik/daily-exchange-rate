@@ -17,5 +17,5 @@ import java.util.List;
 public final class CommandLineArgs {
     private final LocalDate startDate;
     private final LocalDate endDate;
-    private final List<String> seriesNames;
+    private final List<String> series;
 }
