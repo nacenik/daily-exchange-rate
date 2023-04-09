@@ -5,16 +5,15 @@ import net.oleksin.model.CommandLineArgs;
 import net.oleksin.parser.Parser;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.regex.Pattern;
 
-public class CommandLineArgsParser implements Parser<String[], CommandLineArgs> {
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final Pattern SERIAL_NUMBER_PATTERN = Pattern.compile("^(?i)fx[a-z]{6}$");
-    private static final Pattern DATE_PATTERN = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
+import static net.oleksin.util.PatternConstantUtil.DATE_PATTERN;
+import static net.oleksin.util.PatternConstantUtil.DATE_TIME_FORMATTER;
+import static net.oleksin.util.PatternConstantUtil.SERIAL_NAME_PATTERN;
+
+public class SeriesNameCommandLineArgsParser implements Parser<String[], CommandLineArgs> {
     private static final int MAX_SERIAL_NUMBER_SIZE = 4;
     private static final int MAX_DATES_SIZE = 2;
 
@@ -27,7 +26,7 @@ public class CommandLineArgsParser implements Parser<String[], CommandLineArgs> 
         final var dates = new ArrayList<LocalDate>();
         final var serialNames = new LinkedList<String>();
         for (String arg : args) {
-            if(SERIAL_NUMBER_PATTERN.matcher(arg).matches()) {
+            if(SERIAL_NAME_PATTERN.matcher(arg).matches()) {
                 serialNames.add(arg);
             } else if (DATE_PATTERN.matcher(arg).matches()) {
                 dates.add(LocalDate.parse(arg, DATE_TIME_FORMATTER));

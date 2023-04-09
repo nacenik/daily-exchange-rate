@@ -11,64 +11,62 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-class CommandLineArgsParserTest {
+class SeriesGroupCommandLineArgsParserTest {
     private static LocalDate now;
-    private static CommandLineArgsParser commandLineArgsParser;
+    private static SeriesGroupCommandLineArgsParser seriesGroupCommandLineArgsParser;
     private List<String> listWithTestData;
 
     @BeforeAll
     static void beforeAll() {
-        commandLineArgsParser = new CommandLineArgsParser();
+        seriesGroupCommandLineArgsParser = new SeriesGroupCommandLineArgsParser();
         now = LocalDate.now();
     }
 
     @BeforeEach
     void setUp() {
-        listWithTestData = new ArrayList<>(List.of("FXCADUSD", "FXGBPNOK", "FXUSDCAD", "FXUSDEUR"));
+        listWithTestData = new ArrayList<>(List.of("Fx_rates_daily"));
     }
 
     @Test
-    void parse_cmdArgsWithFourSeriesNamesAndWithoutDates_ok() {
+    void parse_cmdArgsWithOneSeriesGroupAndWithoutDates_ok() {
         final var expected = new CommandLineArgs(null, null,
                 listWithTestData);
         String[] args = listWithTestData.toArray(String[]::new);
-        final var commandLineArgs = assertDoesNotThrow(() -> commandLineArgsParser.parse(args));
+        final var commandLineArgs = assertDoesNotThrow(() -> seriesGroupCommandLineArgsParser.parse(args));
         assertEquals(expected, commandLineArgs);
     }
 
     @Test
-    void parse_cmdArgsWitOneDateAndFourSeriesNames_ok() {
+    void parse_cmdArgsWitOneDateAndOneSeriesGroup_ok() {
         listWithTestData.add(now.toString());
         final var expected = new CommandLineArgs(now, null,
                 listWithTestData.subList(0, listWithTestData.size() - 1));
         String[] args = listWithTestData.toArray(String[]::new);
-        final var commandLineArgs = assertDoesNotThrow(() -> commandLineArgsParser.parse(args));
+        final var commandLineArgs = assertDoesNotThrow(() -> seriesGroupCommandLineArgsParser.parse(args));
         assertEquals(expected, commandLineArgs);
     }
 
     @Test
-    void parse_cmdArgsWithTwoDatesAndFourSeriesNames_ok() {
+    void parse_cmdArgsWithTwoDatesAndOneSeriesGroup_ok() {
         listWithTestData.add(now.toString());
         listWithTestData.add(now.toString());
         final var expected = new CommandLineArgs(now, now,
                 listWithTestData.subList(0, listWithTestData.size() - 2));
         String[] args = listWithTestData.toArray(String[]::new);
-        final var commandLineArgs = assertDoesNotThrow(() -> commandLineArgsParser.parse(args));
+        final var commandLineArgs = assertDoesNotThrow(() -> seriesGroupCommandLineArgsParser.parse(args));
         assertEquals(expected, commandLineArgs);
     }
 
     @Test
-    void parse_cmdArgsWithTwoDatesAndFourSeriesNamesMixedOrder_ok() {
+    void parse_cmdArgsWithTwoDatesAndOneSeriesGroupMixedOrder_ok() {
         listWithTestData.add(0, now.toString());
         listWithTestData.add(now.toString());
         final var expected = new CommandLineArgs(now, now,
                 listWithTestData.subList(1, listWithTestData.size() - 1));
         String[] args = listWithTestData.toArray(String[]::new);
-        final var commandLineArgs = assertDoesNotThrow(() -> commandLineArgsParser.parse(args));
+        final var commandLineArgs = assertDoesNotThrow(() -> seriesGroupCommandLineArgsParser.parse(args));
         assertEquals(expected, commandLineArgs);
     }
 
@@ -80,35 +78,40 @@ class CommandLineArgsParserTest {
         final var expected = new CommandLineArgs(null, null,
                 listWithTestData);
         String[] args = listWithTestData.toArray(String[]::new);
-        final var commandLineArgs = assertDoesNotThrow(() -> commandLineArgsParser.parse(args));
+        final var commandLineArgs = assertDoesNotThrow(() -> seriesGroupCommandLineArgsParser.parse(args));
         assertEquals(expected, commandLineArgs);
     }
 
     @Test
     void parse_sevenArgs_throwIllegalArgumentException() {
         String[] args = {"-s", "USD", "-b", "PLN", "-f", "2019-01-01", "-t", "2019-01-01", "-o", "csv"};
-        assertThrows(IllegalArgumentException.class, () -> commandLineArgsParser.parse(args));
+        assertThrows(IllegalArgumentException.class, () -> seriesGroupCommandLineArgsParser.parse(args));
     }
 
     @Test
     void parse_threeDates_throwParserException() {
         String[] args = {"2019-01-01", "2019-01-01", "2019-01-01"};
-        assertThrows(ParserException.class, () -> commandLineArgsParser.parse(args));
+        assertThrows(ParserException.class, () -> seriesGroupCommandLineArgsParser.parse(args));
     }
 
     @Test
-    void parse_fiveSerialNumbers_throwParserException() {
-        String[] args = {"FXCADUSD", "FXCADUSD", "FXCADUSD", "FXCADUSD", "FXCADUSD"};
-        assertThrows(ParserException.class, () -> commandLineArgsParser.parse(args));
+    void parse_twoSerialGroups_throwParserException() {
+        String[] args = {"Fx_rates_daily", "Fx_rates_daily"};
+        assertThrows(ParserException.class, () -> seriesGroupCommandLineArgsParser.parse(args));
     }
 
     @Test
     void parse_dateIllegalFormat_throwParserException() {
-        assertThrows(ParserException.class, () -> commandLineArgsParser.parse(new String[]{"2019.01.01"}));
+        assertThrows(ParserException.class, () -> seriesGroupCommandLineArgsParser.parse(new String[]{"2019.01.01"}));
     }
 
     @Test
-    void parse_serialNameIllegalFormat_throwParserException() {
-        assertThrows(ParserException.class, () -> commandLineArgsParser.parse(new String[]{"FX123ASD"}));
+    void parse_serialGroupIllegalFormatRate_throwParserException() {
+        assertThrows(ParserException.class, () -> seriesGroupCommandLineArgsParser.parse(new String[]{"fx_dasda_daily"}));
+    }
+
+    @Test
+    void parse_serialGroupIllegalFormat_throwParserException() {
+        assertThrows(ParserException.class, () -> seriesGroupCommandLineArgsParser.parse(new String[]{"sds_20002_8"}));
     }
 }

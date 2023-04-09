@@ -6,14 +6,14 @@ import net.oleksin.service.QueryBuilderService;
 
 import java.time.LocalDate;
 
-public class CommandLineQueryBuilderService implements QueryBuilderService {
+public class SeriesNameCommandLineQueryBuilderService implements QueryBuilderService {
     private static final String QUERY = "https://www.bankofcanada.ca/valet/observations/%s/json";
     private static final String PARAMS = "?start_date=%s&end_date=%s";
     private static final String DEFAULT_SERIAL_NUMBER = "FXCADUSD,FXAUDCAD";
     private static final int DEFAULT_WEEKS_TO_SUBTRACT = 1;
     private final Parser<String[], CommandLineArgs> commandLineArgsParser;
 
-    public CommandLineQueryBuilderService(Parser<String[], CommandLineArgs> commandLineArgsParser) {
+    public SeriesNameCommandLineQueryBuilderService(Parser<String[], CommandLineArgs> commandLineArgsParser) {
         this.commandLineArgsParser = commandLineArgsParser;
     }
     @Override

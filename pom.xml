@@ -123,6 +123,7 @@
                     <excludes>
                         <exclude>**/Main*</exclude>
                         <exclude>**/model/**</exclude>
+                        <exclude>**/util/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

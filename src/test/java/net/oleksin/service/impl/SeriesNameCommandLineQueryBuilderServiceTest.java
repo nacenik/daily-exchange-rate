@@ -2,7 +2,7 @@ package net.oleksin.service.impl;
 
 import net.oleksin.model.CommandLineArgs;
 import net.oleksin.parser.Parser;
-import net.oleksin.parser.impl.CommandLineArgsParser;
+import net.oleksin.parser.impl.SeriesNameCommandLineArgsParser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,21 +13,20 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class CommandLineQueryBuilderServiceTest {
-
+class SeriesNameCommandLineQueryBuilderServiceTest {
     private static final String FXCADUSD = "FXCADUSD";
     private static final String FXAUDCAD = "FXAUDCAD";
     private static final String START_DATE = "start_date=";
     private static final String END_DATE = "end_date=";
     private static LocalDate now;
-    private static CommandLineQueryBuilderService service;
+    private static SeriesNameCommandLineQueryBuilderService service;
     private static Parser<String[], CommandLineArgs> mockParser;
 
 
     @BeforeAll
     static void beforeAll() {
-        mockParser = Mockito.mock(CommandLineArgsParser.class);
-        service = new CommandLineQueryBuilderService(mockParser);
+        mockParser = Mockito.mock(SeriesNameCommandLineArgsParser.class);
+        service = new SeriesNameCommandLineQueryBuilderService(mockParser);
         now = LocalDate.now();
     }
 
