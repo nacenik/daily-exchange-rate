@@ -1,5 +1,6 @@
 package net.oleksin.api;
 
+import lombok.RequiredArgsConstructor;
 import net.oleksin.exception.HttpResponseException;
 import net.oleksin.service.QueryBuilderService;
 
@@ -9,14 +10,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+@RequiredArgsConstructor
 public class ApiHttpClientRequester implements ApiRequester {
+    private static final int STATUS_OK = 200;
     private final HttpClient httpClient;
     private final QueryBuilderService queryService;
-
-    public ApiHttpClientRequester(HttpClient httpClient, QueryBuilderService queryService) {
-        this.httpClient = httpClient;
-        this.queryService = queryService;
-    }
 
     @Override
     public String callApiByParams(String[] args) {
@@ -27,7 +25,7 @@ public class ApiHttpClientRequester implements ApiRequester {
         try {
             final var response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             final var statusCode = response.statusCode();
-            if (statusCode == 200) {
+            if (statusCode == STATUS_OK) {
                 return response.body();
             } else {
                 throw new HttpResponseException(String

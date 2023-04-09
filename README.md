@@ -13,7 +13,7 @@ To run the command line application, navigate to the target directory or directo
 ```
 java -jar daily-exchange-rate-1.0-SNAPSHOT.jar [args params]
 ```
-Output file will be generated in directory where .jar file is.
+Output file with name `exchange-rate.csv` will be generated in directory where .jar file is.
 
 **NOTE:** this is one time running command line application. If you want to get new output, please, repeat **Step 2**.
 
